@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <title>my todo</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <h1 style="margin-bottom: 0px;">
+            My Todo - To - Do ...
+        </h1>
+        <form action="" id="form">
+        <div class="center">
+        <div class="input-group input-group-sm mb-3 col-sm-6" style="color: peru;">
+            
+                <label for="title">Name your Todo:</label>&nbsp;  
+                <input type="text" name="title" class="form-control" id="todoUserInput" placeholder=" type here... ">
+                <div class="input-group-append input-group-sm mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+         </div>
+         </div></form>
+         <div class="center">
+        <div class="input-group input-group-sm mb-3 col-sm-5" style="color: peru;">
+                        Search your Todo:
+                        <input type="text" class="form-control"  placeholder="Search">
+                        <div class="input-group-append">
+                          <button class="btn btn-success" type="submit">Go</button>
+                        </div>
+        </div>
+    </div>
+        <div class="box" style="background-image: url(); opacity: 0.5;background-size: cover; min-height: 600px; background-repeat:no-repeat;">
+            <h2 style="text-align: center;color:whitesmoke; text-decoration: transparent turquoise;">List of TODO's...</h2>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <ul class="list-group" id="display">
+                    
+                    </ul>
+                </div>
+                <div class="col-lg-2"></div>
+            </div> 
+            <br>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="alert" role="alert" id="message">
+                        
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+               
+        </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+           $(document).ready(()=>{
+            const display = $("#display");
+            const form = $("#form");
+            const todoUserInput = $("#todoUserInput");
+            const message = $("#message");
+            message.hide();
+
+            const displayMessage = (flag,msg)=>{
+                // successful
+                if(flag){
+                    message.removeClass('alert-danger');
+                    message.addClass('alert-success');
+                    message.html(msg);
+                    message.show();
+                }
+                else{
+                    message.removeClass('alert-success');
+                    message.addClass('alert-danger');
+                    message.html(msg);
+                    message.show();
+                }
+            }
+ 
+            const getTodos = ()=>{
+                fetch('/getTodos',{method : "get"}).then((response)=>{
+                    return response.json();
+                }).then((data)=>{
+                    console.log(data);
+                    displayTodos(data);
+                });
+                message.hide();
+            }
+
+            getTodos();
+
+            const resetTodosInput = ()=>{
+                todoUserInput.val('');
+            }
+
+            
+
+            const deleteTodo = (todo,listItemID,deleteID)=>{
+                let deleteBtn = $(`#${deleteID}`);
+                deleteBtn.click(()=>{
+                    fetch(`/${todo._id}`,{
+                        method: "delete"
+                    }).then((response)=>{
+                        return response.json();
+                    }).then((data)=>{
+                        if(data.ok == 1){
+                            $(`#${listItemID}`).remove();
+                            displayMessage(false,'REMAINDER WAS DELETED');
+                        }
+                    });
+                });
+            }
+
+
+            const buildIDS = (todo)=>{
+                return {
+                    deleteID : "delete_" + todo._id,
+                    listItemID : "listItem_" + todo._id,
+                    todoID : "todo_" + todo._id
+                }
+            }
+
+            const buildTemplate = (todo,ids)=>{
+                return `<li class="list-group-item" id="${ids.listItemID}">
+                            <div class="row">
+                                <div class="col-md-4" id="${ids.todoID}">${todo.todo}</div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4 text-right">
+                                    <button type="button" class="btn btn-danger" id="${ids.deleteID}">Delete</button>
+                                </div>
+                            </div>
+                       </li>`;
+            }
+
+            const displayTodos = (data)=>{
+                data.forEach((todo)=>{
+                    let ids = buildIDS(todo);
+                    display.append(buildTemplate(todo,ids));
+                    deleteTodo(todo,ids.listItemID,ids.deleteID);
+                });
+            }
+
+            form.submit((e)=>{
+                e.preventDefault();
+                fetch('/',{
+                    method : 'post',
+                    body : JSON.stringify({todo : todoUserInput.val()}),
+                    headers : {
+                        "Content-Type" : "application/json; charset=utf-8"
+                    }
+                }).then((response)=>{
+                    return response.json();
+                }).then((data)=>{
+                    if(!data.error){
+                        if(data.result.ok == 1 && data.result.n == 1){
+                            let ids = buildIDS(data.document);
+                            display.append(buildTemplate(data.document,ids));
+                            deleteTodo(data.document,ids.listItemID,ids.deleteID);
+                            displayMessage(true,data.msg);
+                        }
+                    }
+                    else
+                        displayMessage(false,data.error.message);
+
+                    resetTodosInput();
+                    
+                });
+            });
+
+        });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "doto",
+  "version": "1.0.0",
+  "description": "todo",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "heroku",
+    "todo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ganeshtedi/doto.git"
+  },
+  "engines": {
+    "node": "12.14.1"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "assert": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5",
+    "node": "^13.12.0",
+    "path": "^0.12.7"
+  }
+}
