@@ -82,7 +82,7 @@ app.use((err,req,res,next)=>{
         }
     });
 });
-const PORT=3000 || process.env.PORT;
-        app.listen(3000 || process.env.PORT,()=>{
+const PORT=3000 || 25892 || process.env.PORT;
+        app.listen(3000 || 25892 || process.env.PORT,()=>{
              console.log('connected to database, app listening on ${PORT} ');
         });
