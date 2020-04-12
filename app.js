@@ -15,7 +15,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/css'));
 app.use(express.static(__dirname + '/public/images'));
 app.get('/',(req,res)=>{
+    console.log('rendered index');
    res.render('index');
+   console.log('okay with this index');
 });
 
 // read
@@ -82,7 +84,7 @@ app.use((err,req,res,next)=>{
         }
     });
 });
-const PORT=3000 || 25892 || process.env.PORT;
+const Port=3000 || 25892 || process.env.PORT;
         app.listen(3000 || 25892 || process.env.PORT,()=>{
              console.log('connected to database, app listening on ${PORT} ');
         });
