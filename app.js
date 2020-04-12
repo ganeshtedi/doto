@@ -84,7 +84,5 @@ app.use((err,req,res,next)=>{
         }
     });
 });
-const Port=3000 || 25892 || process.env.PORT;
-        app.listen(3000 || 25892 || process.env.PORT,()=>{
-             console.log('connected to database, app listening on ${PORT} ');
-        });
+const PORT = process.env.PORT || 5001 || 8080;
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
