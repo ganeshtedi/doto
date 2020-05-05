@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public/css'));
 app.use(express.static(__dirname + '/public/images'));
 app.get('/',(req,res)=>{
     console.log('rendered index');
-    res.sendFile(path.join(__dirname+'/index.html'));
+    res.sendFile(path.join(__dirname+'/views/index.html'));
    //res.render('index');
   // res.sendFile('index.html');
    console.log('okay with this index');
