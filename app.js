@@ -12,8 +12,6 @@ const schema = Joi.object().keys({
 app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/public/css'));
-app.use(express.static(__dirname + '/public/images'));
 app.get('/',(req,res)=>{
     console.log('rendered index');
     res.sendFile(path.join(__dirname+'/views/index.html'));
