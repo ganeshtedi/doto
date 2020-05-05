@@ -1,38 +1,103 @@
 <html>
     <head>
-        <title>my todo</title>
+        <title>t-Todo</title>
         <link rel="stylesheet" type="text/css" href="public/styles.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            * {
+                text-align: center;
+                padding: 0;
+                margin: 0;
+            }
+            
+            header {
+                font-size: 2em;
+                font-style: bold;
+                color: yellowgreen;
+                background-color: wheat;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight: 500;
+                letter-spacing: 5px;
+                text-shadow: whitesmoke;
+            }
+            
+            header .caps {
+                color: violet;
+            }
+            
+            .con {
+                padding: 20px 0px;
+                font-size: 30px;
+                margin: 36px auto;
+                border: tan 6px solid;
+                max-width: 500px;
+                min-height: 700px;
+            }
+            
+            .con input[type=text] {
+                padding: 18px auto;
+                width: 16em;
+                height: 2em;
+                margin: 3px;
+                text-align: start;
+                font-size: 20px;
+                border-style: none;
+            }
+            
+            .con input[type=submit] {
+                width: 5em;
+                height: 2em;
+                border: thistle solid 3px;
+                border-radius: 5px;
+                text-align: center;
+                font-size: large;
+                cursor: pointer;
+            }
+            
+            .con input:focus {
+                outline: none;
+            }
+            
+            .rap {
+                background-color: rgb(247, 199, 239);
+            }
+            
+            #lal {
+                box-shadow: inset 0 12px 12px -12px;
+            }
+            
+            #pap {
+                margin: 40px auto;
+                height: 12px;
+                border: 0;
+                margin-bottom: 20px;
+                box-shadow: inset 0 12px 12px -12px rgba(221, 6, 250, 0.5);
+            }
+        </style>
     </head>
     <body>
-        <h1 style="margin-bottom: 0px;">
-            My Todo - To - Do ...
-        </h1>
+        <header>
+            <h1>
+                t-<span class="caps">T</span>o<span class="caps">d</span>o
+            </h1>
+        </header>
+        <div class="con">
         <form action="" id="form">
-        <div class="center">
-        <div class="input-group input-group-sm mb-3 col-sm-6" style="color: peru;">
-            
-                <label for="title">Name your Todo:</label>&nbsp;  
-                <input type="text" name="title" class="form-control" id="todoUserInput" placeholder=" type here... ">
-                <div class="input-group-append input-group-sm mb-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-         </div>
-         </div></form>
-         <div class="center">
-        <div class="input-group input-group-sm mb-3 col-sm-5" style="color: peru;">
-                        Search your Todo:
-                        <input type="text" class="form-control"  placeholder="Search">
-                        <div class="input-group-append">
-                          <button class="btn btn-success" type="submit">Go</button>
-                        </div>
-        </div>
-    </div>
-        <div class="box" style="background-image: url(); opacity: 0.5;background-size: cover; min-height: 600px; background-repeat:no-repeat;">
+                <div class="can">
+                <input type="text" id="todoUserInput" placeholder=" type here... ">
+                <input type="submit" value="go on">
+                <hr id="lal">
+                <input type="text" placeholder="Get your does...">
+                <input type="submit" value="Search">
+                <hr id="lal">
+            </div>
+        </form>
+        <hr id="pap">
+        <div class="box">
             <h2 style="text-align: center;color:whitesmoke; text-decoration: transparent turquoise;">List of TODO's...</h2>
             <div class="row">
                 <div class="col-lg-2"></div>
@@ -56,7 +121,6 @@
                
         </div>
         </div>
-
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -99,9 +163,6 @@
             const resetTodosInput = ()=>{
                 todoUserInput.val('');
             }
-
-            
-
             const deleteTodo = (todo,listItemID,deleteID)=>{
                 let deleteBtn = $(`#${deleteID}`);
                 deleteBtn.click(()=>{
@@ -126,7 +187,6 @@
                     todoID : "todo_" + todo._id
                 }
             }
-
             const buildTemplate = (todo,ids)=>{
                 return `<li class="list-group-item" id="${ids.listItemID}">
                             <div class="row">
