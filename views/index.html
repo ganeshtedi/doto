@@ -214,8 +214,6 @@
                     headers : {
                         "Content-Type" : "application/json; charset=utf-8"
                     }
-                }).then((response)=>{
-                    return response.json({data});
                 }).then((data)=>{
                     if(!data.error){
                         if(data.result.ok == 1 && data.result.n == 1){
