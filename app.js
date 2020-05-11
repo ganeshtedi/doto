@@ -2,14 +2,12 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const path = require('path');
 const Joi = require('@hapi/joi');
-const ejs = require('ejs');
 const db = require("./db");
 const collection = "todo";
 const app = express();
 const schema = Joi.object().keys({
     todo : Joi.string().required()
 });
-app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/',(req,res)=>{
